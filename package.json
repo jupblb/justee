@@ -1,0 +1,12 @@
+{
+  "name": "justee",
+  "version": "0.1.0",
+  "private": true,
+  "devDependencies": {
+    "@webos-tools/cli": "^3.2.1",
+    "@enact/cli": "^7.1.0"
+  },
+  "scripts": {
+    "ares": "ares"
+  }
+}
