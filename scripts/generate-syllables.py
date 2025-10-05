@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Generate Polish syllables of specified length by extracting from lexicon.
-Uses grapheme-based tokenization to respect Polish phonetics.
+Uses pyphen for linguistic syllabification.
 Usage: python generate-syllables.py <length>
 """
 
@@ -9,60 +9,16 @@ import sys
 import json
 from pathlib import Path
 from collections import Counter
+import pyphen
 
 # Polish alphabet
 POLISH_ALPHABET = set("aąbcćdeęfghijklłmnńoóprsśtuwyzźż")
 
-# Multi-character graphemes (longest match first)
-MULTI_GRAPHEMES = [
-    "dzi",
-    "dż",
-    "dź",
-    "dz",
-    "sz",
-    "cz",
-    "rz",
-    "ch",
-    "ci",
-    "si",
-    "zi",
-    "ni",
-]
 
-
-def tokenize_graphemes(word):
-    """Tokenize word into graphemes using longest-match greedy algorithm."""
-    graphemes = []
-    i = 0
-    while i < len(word):
-        matched = False
-        # Try multi-character graphemes (longest first)
-        for grapheme in MULTI_GRAPHEMES:
-            if word[i : i + len(grapheme)] == grapheme:
-                graphemes.append(grapheme)
-                i += len(grapheme)
-                matched = True
-                break
-        if not matched:
-            # Single character grapheme
-            graphemes.append(word[i])
-            i += 1
-    return graphemes
-
-
-def extract_n_char_syllables(graphemes, n):
-    """Extract all continuous grapheme sequences that equal n characters."""
-    syllables = []
-
-    # Try all window sizes
-    for window_size in range(1, len(graphemes) + 1):
-        for start in range(len(graphemes) - window_size + 1):
-            window = graphemes[start : start + window_size]
-            syllable = "".join(window)
-            if len(syllable) == n:
-                syllables.append(syllable)
-
-    return syllables
+def syllabify_word(word, pyphen_dict):
+    """Syllabify word using pyphen and return list of syllables."""
+    syllabified = pyphen_dict.inserted(word, hyphen="-")
+    return syllabified.split("-")
 
 
 def load_lexicon(lexicon_path):
@@ -84,8 +40,9 @@ def is_polish_only(text):
 
 def generate_syllables(length, lexicon):
     """Generate all syllables of given character length from lexicon."""
-    print(f"Extracting {length}-character syllables from lexicon...")
+    print(f"Extracting {length}-character syllables from lexicon using pyphen...")
 
+    pyphen_dict = pyphen.Pyphen(lang="pl_PL")
     syllable_counter = Counter()
     processed = 0
     total = len(lexicon)
@@ -98,11 +55,10 @@ def generate_syllables(length, lexicon):
                 f"  Processed {processed:,}/{total:,} words ({100 * processed / total:.1f}%)"
             )
 
-        graphemes = tokenize_graphemes(word)
-        syllables = extract_n_char_syllables(graphemes, length)
+        syllables = syllabify_word(word, pyphen_dict)
 
         for syllable in syllables:
-            if is_polish_only(syllable):
+            if len(syllable) == length and is_polish_only(syllable):
                 syllable_counter[syllable] += 1
 
     # Convert to list with occurrences, sorted by frequency
