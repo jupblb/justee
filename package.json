@@ -1,12 +1,37 @@
 {
   "name": "justee",
-  "version": "0.1.0",
+  "version": "0.0.1",
+  "description": "Polish syllable learning app for LG webOS TV",
   "private": true,
-  "devDependencies": {
-    "@webos-tools/cli": "^3.2.1",
-    "@enact/cli": "^7.1.0"
-  },
+  "main": "src/index.js",
   "scripts": {
-    "ares": "ares"
+    "serve": "enact serve",
+    "pack": "enact pack",
+    "pack-p": "enact pack -p",
+    "watch": "enact pack --watch",
+    "clean": "enact clean",
+    "test": "enact test"
+  },
+  "enact": {
+    "theme": "sandstone"
+  },
+  "dependencies": {
+    "@enact/core": "^4.8.0",
+    "@enact/i18n": "^4.8.0",
+    "@enact/sandstone": "^2.8.0",
+    "@enact/spotlight": "^4.8.0",
+    "@enact/ui": "^4.8.0",
+    "@enact/webos": "^5.3.0",
+    "ilib": "^14.19.0",
+    "prop-types": "^15.8.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@enact/cli": "^7.1.0",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "@webos-tools/cli": "^3.2.1",
+    "typescript": "^5.9.3"
   }
 }

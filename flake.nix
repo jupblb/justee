@@ -6,10 +6,21 @@
 
   outputs = { self, nixpkgs, flake-utils }:
     flake-utils.lib.eachDefaultSystem(system:
-      let pkgs = nixpkgs.legacyPackages.${system};
+      let
+        pkgs    = nixpkgs.legacyPackages.${system};
+        python3 = pkgs.python3.withPackages(ps: with ps; [ pyphen ]);
       in {
         devShells.default = pkgs.mkShell({
-          buildInputs = with pkgs; [ nodejs pandoc pnpm pre-commit ];
+          buildInputs = with pkgs; [
+            curl
+            gnumake gnused
+            nodejs
+            pandoc pnpm pre-commit pyright python3
+            ruff
+            typescript-language-server
+            unzip
+            vscode-css-languageserver
+          ];
         });
       }
     );
