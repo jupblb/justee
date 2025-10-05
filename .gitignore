@@ -1,4 +1,6 @@
 /.direnv/
+/data/
+/dist/
 /node_modules/
 
-/.envrc
+*.ipk

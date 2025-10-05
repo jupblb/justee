@@ -1,0 +1,9 @@
+{
+  "id": "com.justee.app",
+  "version": "0.0.1",
+  "vendor": "justee",
+  "type": "web",
+  "main": "index.html",
+  "title": "Justee",
+  "icon": "icon.png"
+}

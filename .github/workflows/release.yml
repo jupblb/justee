@@ -1,0 +1,62 @@
+name: Build and Release
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: self-hosted
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Install Nix
+        uses: cachix/install-nix-action@v27
+        with:
+          nix_path: nixpkgs=channel:nixos-unstable
+      
+      - name: Install pnpm
+        run: nix develop --command pnpm install
+      
+      - name: Download lexicon and generate syllables
+        run: nix develop --command make syllables
+      
+      - name: Build production app
+        run: nix develop --command pnpm run pack-p
+      
+      - name: Package app
+        run: nix develop --command npx ares-package dist/
+      
+      - name: Get package filename
+        id: package
+        run: |
+          PACKAGE_FILE=$(ls *.ipk)
+          echo "filename=$PACKAGE_FILE" >> $GITHUB_OUTPUT
+          echo "Found package: $PACKAGE_FILE"
+      
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: latest
+          name: Latest Build
+          body: |
+            ## Justee - Aplikacja do nauki czytania fragmentów słów
+            
+            Najnowsza wersja aplikacji dla telewizorów LG webOS.
+            
+            ### Instalacja
+            
+            1. Pobierz plik `.ipk` poniżej
+            2. Postępuj zgodnie z [instrukcją instalacji](https://github.com/${{ github.repository }}/blob/main/README.md#instalacja-na-telewizorze-lg)
+          files: |
+            ${{ steps.package.outputs.filename }}
+          draft: false
+          prerelease: false
+          make_latest: true
