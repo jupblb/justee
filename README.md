@@ -80,16 +80,18 @@ z menu telewizora.
 
 ## Jak działa generator danych?
 
-Aplikacja wykorzystuje słownik języka polskiego (SJP.PL) do generowania
-naturalnych fragmentów wyrazów:
+Aplikacja wykorzystuje słownik języka polskiego (SJP.PL) oraz bibliotekę pyphen
+do generowania prawdziwych sylab językowych:
 
-1.  **Tokenizacja grafemów**: Rozpoznaje wieloznakowe grafemy polskie (`sz`,
-    `cz`, `rz`, `ch`, `dzi`, `ci`, `si`, `ni`, `zi`)
-2.  **Ekstrakcja fragmentów**: Wydobywa sekwencje grafemów o określonej liczbie
-    znaków
-3.  **Filtrowanie**: Zachowuje tylko fragmenty zawierające wyłącznie polskie
-    litery
-4.  **Ważone losowanie**: Priorytetyzuje częściej występujące fragmenty
+1.  **Sylabizacja**: Dzieli wyrazy na sylaby używając algorytmu pyphen (polskie
+    reguły hyphenacji)
+2.  **Ekstrakcja**: Wydobywa sylaby o określonej długości (2, 3 lub 4 znaki)
+3.  **Filtrowanie**: Zachowuje tylko sylaby zawierające wyłącznie polskie litery
+4.  **Ważone losowanie**: Priorytetyzuje częściej występujące sylaby
+
+W przeciwieństwie do prostego wycinania fragmentów słów, metoda ta generuje
+rzeczywiste sylaby fonetyczne (zawsze zawierające samogłoskę), co jest bardziej
+zgodne z zasadami nauki czytania.
 
 ## Licencja
 
