@@ -18,6 +18,11 @@ const MainPanel = (props: MainPanelProps) => {
 	const [isUppercase, setIsUppercase] = useState(true);
 	const [isDimming, setIsDimming] = useState(false);
 	const dimTimerRef = useRef<NodeJS.Timeout | null>(null);
+	const positionsByLength = useRef<Record<SyllableLength, number>>({
+		2: 0,
+		3: 0,
+		4: 0
+	});
 
 	const syllables = POLISH_SYLLABLES[syllableLength];
 
@@ -42,18 +47,22 @@ const MainPanel = (props: MainPanelProps) => {
 	}, [resetTimer]);
 
 	const incLen = useCallback(() => {
-		setSyllableLength(prev => Math.min(4, prev + 1) as SyllableLength);
-		setCurrentIndex(0);
+		positionsByLength.current[syllableLength] = currentIndex;
+		const newLength = Math.min(4, syllableLength + 1) as SyllableLength;
+		setSyllableLength(newLength);
+		setCurrentIndex(positionsByLength.current[newLength]);
 		resetTimer();
 		return true;
-	}, [resetTimer]);
+	}, [resetTimer, syllableLength, currentIndex]);
 
 	const decLen = useCallback(() => {
-		setSyllableLength(prev => Math.max(2, prev - 1) as SyllableLength);
-		setCurrentIndex(0);
+		positionsByLength.current[syllableLength] = currentIndex;
+		const newLength = Math.max(2, syllableLength - 1) as SyllableLength;
+		setSyllableLength(newLength);
+		setCurrentIndex(positionsByLength.current[newLength]);
 		resetTimer();
 		return true;
-	}, [resetTimer]);
+	}, [resetTimer, syllableLength, currentIndex]);
 
 	const prevIdx = useCallback(() => {
 		setCurrentIndex(prev => Math.max(0, prev - 1));
