@@ -9,35 +9,35 @@ importers:
   .:
     dependencies:
       '@enact/core':
-        specifier: ^4.8.0
-        version: 4.9.8
+        specifier: ^5.3.0
+        version: 5.3.0
       '@enact/i18n':
-        specifier: ^4.8.0
-        version: 4.9.8(ilib@14.21.1)
+        specifier: ^5.3.0
+        version: 5.3.0(ilib@14.21.1)
       '@enact/sandstone':
-        specifier: ^2.8.0
+        specifier: ^2.9.13
         version: 2.9.13(ilib@14.21.1)
       '@enact/spotlight':
-        specifier: ^4.8.0
-        version: 4.9.8
+        specifier: ^5.3.0
+        version: 5.3.0
       '@enact/ui':
-        specifier: ^4.8.0
-        version: 4.9.8
+        specifier: ^5.3.0
+        version: 5.3.0
       '@enact/webos':
         specifier: ^5.3.0
         version: 5.3.0
       ilib:
-        specifier: ^14.19.0
+        specifier: ^14.21.1
         version: 14.21.1
       prop-types:
         specifier: ^15.8.1
         version: 15.8.1
       react:
-        specifier: ^18.2.0
-        version: 18.3.1
+        specifier: ^19.2.0
+        version: 19.2.0
       react-dom:
-        specifier: ^18.2.0
-        version: 18.3.1(react@18.3.1)
+        specifier: ^19.2.0
+        version: 19.2.0(react@19.2.0)
     devDependencies:
       '@enact/cli':
         specifier: ^7.1.0
@@ -1047,6 +1047,11 @@ packages:
     peerDependencies:
       ilib: ^14.20.0 || ^14.20.0-webos1
 
+  '@enact/i18n@5.3.0':
+    resolution: {integrity: sha512-PQNT0U92v5IeOkexd6Tet1GtauQprDGN8PZnvbWKEZpR/DKZZUHqO7yf9+2/Ux+J4Oi32bOcx3Afwbz4J73AYg==}
+    peerDependencies:
+      ilib: ^14.21.0 || ^14.21.0-webos1
+
   '@enact/sandstone@2.9.13':
     resolution: {integrity: sha512-w3BCkvDQKiHosu4mR34JiHTIUGd9wap5sDy+b/OtkK1DCR452xgQ+5dsdsBCVQZJgV1NOKC8hh1k91SU9zn0fA==}
     peerDependencies:
@@ -1055,12 +1060,18 @@ packages:
   '@enact/spotlight@4.9.8':
     resolution: {integrity: sha512-WD2HmVuXjBhy1BOwU53eI0YT+HOZOfUMkOyiNd+wihbzqU4b99Ls1T8GNr1krUZbFNzghrWTCf+NgF1LNUMC4A==}
 
+  '@enact/spotlight@5.3.0':
+    resolution: {integrity: sha512-BOQptI8aQ2FEd0zWBbPb3aXm+QSrtDSWd7rikomADEljLj4T0ukaJcGAGJgk5rJgEte7dyNpXmYyiiuvS+pbTQ==}
+
   '@enact/template-sandstone@2.8.0':
     resolution: {integrity: sha512-7J6QnrXRjfYC3A3c6Qdb+euURhUFxL2Wp0SY6FZ6FL8Btwga29m1X8xpVNbuErNlQ74PY4l5uVCetFZCr2kjGw==}
     engines: {node: '>=6.4.0'}
 
   '@enact/ui@4.9.8':
     resolution: {integrity: sha512-RCUFLEFKEnRCjiXy958EmvTDHQFaMHoIhhGG9lShlGbUxSmeU6gUmpjwD+szm4pl5wMn4XQTethiQO3a2tiiow==}
+
+  '@enact/ui@5.3.0':
+    resolution: {integrity: sha512-bKyYa3kcnvHuqNTCSVv9kG1uB6PGx951ur+mF0r4UJEvi8BkQRzXlC8SubjR+sNoxhB3BjnJ17NnqoSbL4Mzhw==}
 
   '@enact/webos@4.9.8':
     resolution: {integrity: sha512-ZLlfxh13FuPCI3NKdNqkfXeoaIecqSnvIevmsPnhL4sEcBM/nvf3PDI+GCQVA64TJgW1IVVRXIoww35ZasB8jQ==}
@@ -7755,6 +7766,16 @@ snapshots:
       react-dom: 18.3.1(react@18.3.1)
       xhr: 2.6.0
 
+  '@enact/i18n@5.3.0(ilib@14.21.1)':
+    dependencies:
+      '@enact/core': 5.3.0
+      ilib: 14.21.1
+      prop-types: 15.8.1
+      ramda: 0.31.3
+      react: 19.2.0
+      react-dom: 19.2.0(react@19.2.0)
+      xhr: 2.6.0
+
   '@enact/sandstone@2.9.13(ilib@14.21.1)':
     dependencies:
       '@enact/core': 4.9.8
@@ -7781,6 +7802,16 @@ snapshots:
       react-dom: 18.3.1(react@18.3.1)
       warning: 4.0.3
 
+  '@enact/spotlight@5.3.0':
+    dependencies:
+      '@enact/core': 5.3.0
+      classnames: 2.5.1
+      prop-types: 15.8.1
+      ramda: 0.31.3
+      react: 19.2.0
+      react-dom: 19.2.0(react@19.2.0)
+      warning: 4.0.3
+
   '@enact/template-sandstone@2.8.0': {}
 
   '@enact/ui@4.9.8':
@@ -7794,6 +7825,20 @@ snapshots:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
       react-is: 18.3.1
+      warning: 4.0.3
+
+  '@enact/ui@5.3.0':
+    dependencies:
+      '@enact/core': 5.3.0
+      '@enact/i18n': 5.3.0(ilib@14.21.1)
+      classnames: 2.5.1
+      ilib: 14.21.1
+      invariant: 2.2.4
+      prop-types: 15.8.1
+      ramda: 0.31.3
+      react: 19.2.0
+      react-dom: 19.2.0(react@19.2.0)
+      react-is: 19.2.0
       warning: 4.0.3
 
   '@enact/webos@4.9.8':
