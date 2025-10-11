@@ -15,7 +15,7 @@
             curl
             gnumake gnused
             nodejs
-            pandoc pnpm pre-commit pyright python3
+            pandoc pnpm pre-commit prettier pyright python3
             ruff
             typescript-language-server
             unzip

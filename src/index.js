@@ -1,11 +1,11 @@
-import {createRoot} from 'react-dom/client';
+import { createRoot } from "react-dom/client";
 
-import App from './App/App';
+import App from "./App/App";
 
-const appElement = (<App />);
+const appElement = <App />;
 
-if (typeof window !== 'undefined') {
-	createRoot(document.getElementById('root')).render(appElement);
+if (typeof window !== "undefined") {
+  createRoot(document.getElementById("root")).render(appElement);
 }
 
 export default appElement;
